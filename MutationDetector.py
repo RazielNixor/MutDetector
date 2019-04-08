@@ -2,7 +2,6 @@ def MutationDetector():
     geneRef = open("GeneticDatabase.txt")
     geneSequence = [geneRef.readline()]
     geneAcronym = [geneRef.readline()]
-    print(geneAcronym)
     x = 0
     while x < len(geneAcronym):
         geneDict = {}
