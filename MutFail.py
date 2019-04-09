@@ -24,8 +24,8 @@ def MutD():
             finalSequence.append(geneSeq)
             geneSequence.clear()
             geneSeq = ''
-    geneDict = {}
     x = 0
+    geneDict = {}
     for element in geneAcronym:
         geneDict[geneAcronym[x]] = finalSequence[x]
         x += 1
@@ -42,7 +42,8 @@ def MutD():
     geneList = [nucleotide for nucleotide in geneDict[gene]]
     geneTest = input("Please Input the Sequence you wish to test: ")
     nucleotideList = [nucleotide for nucleotide in geneTest]
-    
+    # Index Error due to discrepancy between length of geneList and nucleotideList
+    # Fixed by removing space caused by line break from copy and paste
     y = 0
     mutationIndex = []
     for x in nucleotideList:
