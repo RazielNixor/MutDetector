@@ -6,7 +6,7 @@ def MutGUI():
         print()
         print()
         print("Please choose from the following options:")
-        print("0) Format Genetic Information for 'GeneDataBase.txt'")
+        print("0) Format Genetic Information from 'GeneDataBase.txt'")
         print("1) Run MutD")
         print()
         print("2) Exit Program")
