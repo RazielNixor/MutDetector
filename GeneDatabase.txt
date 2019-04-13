@@ -1,3 +1,4 @@
+OMG1
         1 aagctagaag cctgaggagc cggagagggt gctggctgcc gcgcggccga gtgtgtttta
        61 tggaccatgt gctgctatgt atgcctgaag aagtacttga aatgcaaatt tggggagact
       121 ttgccatata aatgcttggc tggattaagc gcctaattag gatggttttt caacaagttg
