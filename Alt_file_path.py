@@ -69,10 +69,7 @@ def format_page():
     for x in gene_sequence:
         for z in x:
             real_list.append(z)
-    another_list = []
-    for x in real_list:
-        if x.isalpha():
-            another_list.append(x)
+    another_list = [nucleotide for nucleotide in real_list if nucleotide.isalpha()]
     str_list = ''
     for x in another_list:
         str_list += x
