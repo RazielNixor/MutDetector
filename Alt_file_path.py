@@ -28,7 +28,7 @@ def mutation_gui():
         if choice1 == 2:
             mutation_detector()
             codon_summary()
-        return
+        mutation_gui()
 
 
 def sequence_gene_filter(list_from_file):
@@ -75,6 +75,7 @@ def format_page():
         str_list += x
 
     str_list = str_list.upper()
+    print()
     print(gene_acronym)
     print(str_list)
     output.write(str(str_list))
@@ -97,6 +98,7 @@ def mutation_detector():
     for index, acronym in enumerate(gene_acronym):
         gene_dict[gene_acronym[index]] = just_gene_seq[index]
 
+    print()
     print("Welcome to the Mutation Detector")
     print("Currently the Database consists of the following Genes: ")
 
@@ -190,6 +192,8 @@ def codon_summary():
     print("Codons {} were mutated to {}".format(codon_mutant_gene, codon_mutant_nucleotides))
     print("Total Mutation in the Protein: ", len(codon_mutation_index))
     print()
+
+    mutation_gui()
 
 
 mutation_gui()
