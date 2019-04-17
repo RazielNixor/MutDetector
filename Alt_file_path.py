@@ -167,11 +167,8 @@ def codon_summary():
     gene_str = protein_file.readline()
     protein_file.close()
 
-    nucleotide_str = nucleotide_str.replace('\n', '')
-    gene_str = gene_str.replace('\n', '')
-
-    gene_str = gene_str.upper()
-    nucleotide_str = nucleotide_str.upper()
+    nucleotide_str = nucleotide_str.replace('\n', '').upper()
+    gene_str = gene_str.replace('\n', '').upper()
 
     codon_genes = codon_change(gene_str)
     codon_nucleotides = codon_change(nucleotide_str)
