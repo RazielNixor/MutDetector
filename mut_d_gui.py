@@ -1,6 +1,7 @@
 import textwrap
 
 from helpers import clean_string, create_list_of_strings
+from variables import CODONS
 
 
 def mutation_gui():
@@ -58,8 +59,9 @@ def sequence_gene_filter(list_from_file):
     return gene_acronym, just_gene_seq
 
 
-def format_page():
-    file_input = input("Please enter a file path: ")
+def format_page(file_input='GeneDatabase.txt'):
+    # file_input = input("Please enter a file path: ")
+
     with open(file_input) as gene_ref:
         master_list = [line for line in gene_ref]
     output = open("FormattedDatabase.txt", "w")
@@ -84,9 +86,9 @@ def format_page():
     mutation_gui()
 
 
-def mutation_detector():
+def mutation_detector(file_input='GeneDatabase.txt'):
     try:
-        file_input = input("Please enter a file path: ")
+        # file_input = input("Please enter a file path: ")
         with open(file_input) as gene_ref:
             master_list = [line.upper() for line in gene_ref]
 
@@ -139,90 +141,6 @@ def mutation_detector():
         print("*You didn't enter a valid file path. Please Enter a Valid File Path*")
 
 
-CODONS = {
-    'TTT': 'Phe',
-    'TTC': 'Phe',
-    'TTA': 'Leu',
-    'TTG': 'Leu',
-    'CTT': 'Leu',
-    'CTC': 'Leu',
-    'CTA': 'Leu',
-    'CTG': 'Leu',
-    'ATT': 'Ile',
-    'ATC': 'Ile',
-    'ATA': 'Ile',
-    'ATG': 'Met',
-    'GTT': 'Val',
-    'GTC': 'Val',
-    'GTA': 'Val',
-    'GTG': 'Val',
-    'TCT': 'Ser',
-    'TCC': 'Ser',
-    'TCA': 'Ser',
-    'TCG': 'Ser',
-    'CCT': 'Pro',
-    'CCC': 'Pro',
-    'CCA': 'Pro',
-    'CCG': 'Pro',
-    'ACT': 'Thr',
-    'ACC': 'Thr',
-    'ACA': 'Thr',
-    'ACG': 'Thr',
-    'GCT': 'Ala',
-    'GCC': 'Ala',
-    'GCA': 'Ala',
-    'GCG': 'Ala',
-    'TAT': 'Tyr',
-    'TAC': 'Tyr',
-    'TAA': 'Stop',
-    'TAG': 'Stop',
-    'CAT': 'His',
-    'CAC': 'His',
-    'CAA': 'Gln',
-    'CAG': 'Gln',
-    'AAT': 'Asn',
-    'AAC': 'Asn',
-    'AAA': 'Lys',
-    'AAG': 'Lys',
-    'GAT': 'Asp',
-    'GAC': 'Asp',
-    'GAA': 'Glu',
-    'GAG': 'Glu',
-    'TGT': 'Cys',
-    'TGC': 'Cys',
-    'TGA': 'Stop',
-    'TGG': 'Trp',
-    'CGT': 'Arg',
-    'CGC': 'Arg',
-    'CGA': 'Arg',
-    'CGG': 'Arg',
-    'AGT': 'Ser',
-    'AGC': 'Ser',
-    'AGA': 'Arg',
-    'AGG': 'Arg',
-    'GGT': 'Gly',
-    'GGC': 'Gly',
-    'GGA': 'Gly',
-    'GGG': 'Gly',
-    'AA': 'Stop',
-    'AT': 'Stop',
-    'AC': 'Stop',
-    'AG': 'Stop',
-    'TT': 'Stop',
-    'TA': 'Stop',
-    'TC': 'Stop',
-    'TG': 'Stop',
-    'CC': 'Stop',
-    'CA': 'Stop',
-    'CT': 'Stop',
-    'CG': 'Stop',
-    'GG': 'Stop',
-    'GA': 'Stop',
-    'GT': 'Stop',
-    'GC': 'Stop',
-}
-
-
 def codon_change(list_of_sequence_nucleotides):
     #    Regex solution to the problem
     #    codon_sequence = re.findall('...',list_of_sequence_nucleotides)
@@ -263,5 +181,6 @@ def codon_summary():
     print()
 
     mutation_gui()
+
 
 mutation_gui()
