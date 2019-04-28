@@ -11,13 +11,13 @@ def mutation_gui():
             textwrap.dedent(
                 '''
         Welcome to the Mutation Detector!
-    
-        
+
+
         Please choose from the following options:
         0) Format Genetic Information from 'GeneDataBase.txt'
         1) Run mutation_detector
         2) Run amino_acid_detector
-        
+
         3) Exit Program"
         '''
             )
@@ -200,9 +200,6 @@ CODONS = {
     'GT': 'Stop',
     'GC': 'Stop',
 }
-
-
-# import re
 
 
 def codon_change(list_of_sequence_nucleotides):

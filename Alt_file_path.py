@@ -90,9 +90,6 @@ def mutation_detector():
         with open(file_input) as gene_ref:
             master_list = [line.upper() for line in gene_ref]
 
-        #        with open("GeneDatabase.txt") as gene_ref:
-        #        master_list = [line.upper() for line in gene_ref]
-
         gene_acronym, just_gene_seq = sequence_gene_filter(master_list)
 
         gene_dict = {}
@@ -226,9 +223,6 @@ CODONS = {
 }
 
 
-# import re
-
-
 def codon_change(list_of_sequence_nucleotides):
     #    Regex solution to the problem
     #    codon_sequence = re.findall('...',list_of_sequence_nucleotides)
@@ -270,9 +264,4 @@ def codon_summary():
 
     mutation_gui()
 
-
 mutation_gui()
-
-
-if __name__ == "__main___":
-    mutation_gui()
