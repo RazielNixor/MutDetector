@@ -12,7 +12,7 @@ def MutationDetector():
         geneValues.append(nucleotide)
     print("Welcome to the Mutation Detector")
     print("Currently the Database consists of the following Genes: ")
-    
+
     x = 0
     for genes in geneAcronym:
         print("{}) Gene: ".format(x), geneAcronym[x])
@@ -41,4 +41,3 @@ def MutationDetector():
     print("Nucleotides {} were mutated to {}".format(G, N))
     print("Total Mutations found: ", len(mutationIndex))
     geneRef.close()
-

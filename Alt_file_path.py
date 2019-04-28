@@ -10,16 +10,17 @@ def mutation_gui():
             textwrap.dedent(
                 '''
                 Welcome to the Mutation Detector!
-        
-        
+
+
                 Please choose from the following options:
                 0) Format Genetic Information from 'GeneDataBase.txt'
                 1) Run mutation_detector
                 2) Run amino_acid_detector
-        
+
                 3) Exit Program
                 '''
-            ))
+            )
+        )
         choice1 = int(input("Make your choice here: "))
         if choice1 == 0:
             format_page()
@@ -89,8 +90,8 @@ def mutation_detector():
         with open(file_input) as gene_ref:
             master_list = [line.upper() for line in gene_ref]
 
-    #        with open("GeneDatabase.txt") as gene_ref:
-    #        master_list = [line.upper() for line in gene_ref]
+        #        with open("GeneDatabase.txt") as gene_ref:
+        #        master_list = [line.upper() for line in gene_ref]
 
         gene_acronym, just_gene_seq = sequence_gene_filter(master_list)
 
@@ -141,29 +142,98 @@ def mutation_detector():
         print("*You didn't enter a valid file path. Please Enter a Valid File Path*")
 
 
-CODONS = {'TTT': 'Phe', 'TTC': 'Phe', 'TTA': 'Leu', 'TTG': 'Leu', 'CTT': 'Leu', 'CTC': 'Leu',
-          'CTA': 'Leu', 'CTG': 'Leu', 'ATT': 'Ile', 'ATC': 'Ile', 'ATA': 'Ile', 'ATG': 'Met',
-          'GTT': 'Val', 'GTC': 'Val', 'GTA': 'Val', 'GTG': 'Val', 'TCT': 'Ser', 'TCC': 'Ser',
-          'TCA': 'Ser', 'TCG': 'Ser', 'CCT': 'Pro', 'CCC': 'Pro', 'CCA': 'Pro', 'CCG': 'Pro',
-          'ACT': 'Thr', 'ACC': 'Thr', 'ACA': 'Thr', 'ACG': 'Thr', 'GCT': 'Ala', 'GCC': 'Ala',
-          'GCA': 'Ala', 'GCG': 'Ala', 'TAT': 'Tyr', 'TAC': 'Tyr', 'TAA': 'Stop', 'TAG': 'Stop',
-          'CAT': 'His', 'CAC': 'His', 'CAA': 'Gln', 'CAG': 'Gln', 'AAT': 'Asn', 'AAC': 'Asn',
-          'AAA': 'Lys', 'AAG': 'Lys', 'GAT': 'Asp', 'GAC': 'Asp', 'GAA': 'Glu', 'GAG': 'Glu',
-          'TGT': 'Cys', 'TGC': 'Cys', 'TGA': 'Stop', 'TGG': 'Trp', 'CGT': 'Arg', 'CGC': 'Arg',
-          'CGA': 'Arg', 'CGG': 'Arg', 'AGT': 'Ser', 'AGC': 'Ser', 'AGA': 'Arg', 'AGG': 'Arg',
-          'GGT': 'Gly', 'GGC': 'Gly', 'GGA': 'Gly', 'GGG': 'Gly', 'AA': 'Stop', 'AT': 'Stop',
-          'AC': 'Stop', 'AG': 'Stop', 'TT': 'Stop', 'TA': 'Stop', 'TC': 'Stop', 'TG': 'Stop',
-          'CC': 'Stop', 'CA': 'Stop', 'CT': 'Stop', 'CG': 'Stop', 'GG': 'Stop', 'GA': 'Stop',
-          'GT': 'Stop', 'GC': 'Stop'}
+CODONS = {
+    'TTT': 'Phe',
+    'TTC': 'Phe',
+    'TTA': 'Leu',
+    'TTG': 'Leu',
+    'CTT': 'Leu',
+    'CTC': 'Leu',
+    'CTA': 'Leu',
+    'CTG': 'Leu',
+    'ATT': 'Ile',
+    'ATC': 'Ile',
+    'ATA': 'Ile',
+    'ATG': 'Met',
+    'GTT': 'Val',
+    'GTC': 'Val',
+    'GTA': 'Val',
+    'GTG': 'Val',
+    'TCT': 'Ser',
+    'TCC': 'Ser',
+    'TCA': 'Ser',
+    'TCG': 'Ser',
+    'CCT': 'Pro',
+    'CCC': 'Pro',
+    'CCA': 'Pro',
+    'CCG': 'Pro',
+    'ACT': 'Thr',
+    'ACC': 'Thr',
+    'ACA': 'Thr',
+    'ACG': 'Thr',
+    'GCT': 'Ala',
+    'GCC': 'Ala',
+    'GCA': 'Ala',
+    'GCG': 'Ala',
+    'TAT': 'Tyr',
+    'TAC': 'Tyr',
+    'TAA': 'Stop',
+    'TAG': 'Stop',
+    'CAT': 'His',
+    'CAC': 'His',
+    'CAA': 'Gln',
+    'CAG': 'Gln',
+    'AAT': 'Asn',
+    'AAC': 'Asn',
+    'AAA': 'Lys',
+    'AAG': 'Lys',
+    'GAT': 'Asp',
+    'GAC': 'Asp',
+    'GAA': 'Glu',
+    'GAG': 'Glu',
+    'TGT': 'Cys',
+    'TGC': 'Cys',
+    'TGA': 'Stop',
+    'TGG': 'Trp',
+    'CGT': 'Arg',
+    'CGC': 'Arg',
+    'CGA': 'Arg',
+    'CGG': 'Arg',
+    'AGT': 'Ser',
+    'AGC': 'Ser',
+    'AGA': 'Arg',
+    'AGG': 'Arg',
+    'GGT': 'Gly',
+    'GGC': 'Gly',
+    'GGA': 'Gly',
+    'GGG': 'Gly',
+    'AA': 'Stop',
+    'AT': 'Stop',
+    'AC': 'Stop',
+    'AG': 'Stop',
+    'TT': 'Stop',
+    'TA': 'Stop',
+    'TC': 'Stop',
+    'TG': 'Stop',
+    'CC': 'Stop',
+    'CA': 'Stop',
+    'CT': 'Stop',
+    'CG': 'Stop',
+    'GG': 'Stop',
+    'GA': 'Stop',
+    'GT': 'Stop',
+    'GC': 'Stop',
+}
 
 
 # import re
+
 
 def codon_change(list_of_sequence_nucleotides):
     #    Regex solution to the problem
     #    codon_sequence = re.findall('...',list_of_sequence_nucleotides)
     n = 3
-    codon_sequence = [list_of_sequence_nucleotides[i:i + n] for i in range(0, len(list_of_sequence_nucleotides), n)]
+    codon_sequence = [list_of_sequence_nucleotides[i : i + n] for i in range(0, len(list_of_sequence_nucleotides), n)]
     caps_sequence = [codon.upper() for codon in codon_sequence]
     return caps_sequence
 

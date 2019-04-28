@@ -2,7 +2,7 @@ def formatPage():
     with open("GeneDatabase.txt") as geneRef:
         masterList = [line for line in geneRef]
     output = open("FormattedDatabase.txt", "w")
-    lastList =[]
+    lastList = []
     y = 0
     for x in masterList:
         lastList.append(masterList[y].rstrip('\n'))
@@ -23,4 +23,3 @@ def formatPage():
     output.write(strList)
     output.close()
     geneRef.close()
-    

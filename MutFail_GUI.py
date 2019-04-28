@@ -23,7 +23,7 @@ def formatPage():
     with open("GeneDatabase.txt") as geneRef:
         masterList = [line for line in geneRef]
     output = open("FormattedDatabase.txt", "w")
-    lastList =[]
+    lastList = []
     y = 0
     for x in masterList:
         lastList.append(masterList[y].rstrip('\n'))
@@ -46,10 +46,11 @@ def formatPage():
     print(strList)
     return MutGUI()
 
+
 def MutD():
     with open("GeneticDatabase.txt") as geneRef:
         masterList = [line for line in geneRef]
-    lastList =[]
+    lastList = []
     y = 0
     for x in masterList:
         lastList.append(masterList[y].rstrip('\n'))
@@ -80,7 +81,7 @@ def MutD():
 
     print("Welcome to the Mutation Detector")
     print("Currently the Database consists of the following Genes: ")
-    
+
     x = 0
     for genes in geneAcronym:
         print("{}) Gene: ".format(x), geneAcronym[x])
@@ -107,6 +108,3 @@ def MutD():
     print("Total Mutations found: ", len(mutationIndex))
     geneRef.close()
     return MutGUI()
-
-
-
