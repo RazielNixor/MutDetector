@@ -28,7 +28,7 @@ def mutation_gui():
         if choice1 == 2:
             mutation_detector()
             codon_summary()
-        return
+        mutation_gui()
 
 
 def sequence_gene_filter(list_from_file):
@@ -75,6 +75,7 @@ def format_page():
         str_list += x
 
     str_list = str_list.upper()
+    print()
     print(gene_acronym)
     print(str_list)
     output.write(str(str_list))
@@ -83,55 +84,61 @@ def format_page():
 
 
 def mutation_detector():
-    file_input = input("Please enter a file path: ")
-    with open(file_input) as gene_ref:
-        master_list = [line.upper() for line in gene_ref]
+    try:
+        file_input = input("Please enter a file path: ")
+        with open(file_input) as gene_ref:
+            master_list = [line.upper() for line in gene_ref]
 
+    #        with open("GeneDatabase.txt") as gene_ref:
+    #        master_list = [line.upper() for line in gene_ref]
 
-#    with open("GeneDatabase.txt") as gene_ref:
-#        master_list = [line.upper() for line in gene_ref]
+        gene_acronym, just_gene_seq = sequence_gene_filter(master_list)
 
-    gene_acronym, just_gene_seq = sequence_gene_filter(master_list)
+        gene_dict = {}
+        for index, acronym in enumerate(gene_acronym):
+            gene_dict[gene_acronym[index]] = just_gene_seq[index]
 
-    gene_dict = {}
-    for index, acronym in enumerate(gene_acronym):
-        gene_dict[gene_acronym[index]] = just_gene_seq[index]
+        print()
+        print("Welcome to the Mutation Detector")
+        print("Currently the Database consists of the following Genes: ")
 
-    print("Welcome to the Mutation Detector")
-    print("Currently the Database consists of the following Genes: ")
+        for index, x in enumerate(gene_acronym):
+            print("{}) Gene: ".format(index), gene_acronym[index])
 
-    for index, x in enumerate(gene_acronym):
-        print("{}) Gene: ".format(index), gene_acronym[index])
+        print("The sequence being tested must be as long as the gene sequence being tested against")
+        gene = gene_acronym[int(input("Please Select Your Gene of Interest: "))]
+        gene_list = [nucleotide.upper() for nucleotide in gene_dict[gene]]
 
-    print("The sequence being tested must be as long as the gene sequence being tested against")
-    gene = gene_acronym[int(input("Please Select Your Gene of Interest: "))]
-    gene_list = [nucleotide.upper() for nucleotide in gene_dict[gene]]
+        gene_test = input("Please Input the Sequence you wish to test: ")
+        nucleotide_list = [nucleotide.upper() for nucleotide in gene_test]
+        # Index Error due to discrepancy between length of gene_list and nucleotide_list
+        # Fixed by removing space caused by line break from copy and paste
 
-    gene_test = input("Please Input the Sequence you wish to test: ")
-    nucleotide_list = [nucleotide.upper() for nucleotide in gene_test]
-    # Index Error due to discrepancy between length of gene_list and nucleotide_list
-    # Fixed by removing space caused by line break from copy and paste
+        length_difference = len(gene_list) - len(nucleotide_list)
+        nucleotide_list.extend(create_list_of_strings('', length_difference))
 
-    length_difference = len(gene_list) - len(nucleotide_list)
-    nucleotide_list.extend(create_list_of_strings('', length_difference))
+        mutation_index = [index for index, val in enumerate(gene_list) if val != nucleotide_list[index]]
 
-    mutation_index = [index for index, val in enumerate(gene_list) if val != nucleotide_list[index]]
+        print()
+        print("Gene Mutations found at positions ", mutation_index)
+        genes = [gene_list[val] for val in mutation_index]
+        nucleotides = [nucleotide_list[val] for val in mutation_index]
+        print("Nucleotides {} were mutated to {}".format(genes, nucleotides))
+        print("Total Mutations found: ", len(mutation_index))
 
-    print()
-    print("Gene Mutations found at positions ", mutation_index)
-    genes = [gene_list[val] for val in mutation_index]
-    nucleotides = [nucleotide_list[val] for val in mutation_index]
-    print("Nucleotides {} were mutated to {}".format(genes, nucleotides))
-    print("Total Mutations found: ", len(mutation_index))
-
-    protein_file = open("strings_for_proteins.txt", "w")
-    nucleotide_str = str(''.join(nucleotide_list))
-    gene_str = str(''.join(gene_list))
-    protein_file.write(nucleotide_str + '\n')
-    protein_file.write(gene_str + '\n')
-    protein_file.close()
-
-    return nucleotide_str, gene_str
+        protein_file = open("strings_for_proteins.txt", "w")
+        nucleotide_str = str(''.join(nucleotide_list))
+        gene_str = str(''.join(gene_list))
+        protein_file.write(nucleotide_str + '\n')
+        protein_file.write(gene_str + '\n')
+        protein_file.close()
+        return nucleotide_str, gene_str
+    except IndexError:
+        print()
+        print('*Please enter a valid corresponding gene number*')
+    except FileNotFoundError:
+        print()
+        print("*You didn't enter a valid file path. Please Enter a Valid File Path*")
 
 
 CODONS = {'TTT': 'Phe', 'TTC': 'Phe', 'TTA': 'Leu', 'TTG': 'Leu', 'CTT': 'Leu', 'CTC': 'Leu',
@@ -167,11 +174,8 @@ def codon_summary():
     gene_str = protein_file.readline()
     protein_file.close()
 
-    nucleotide_str = nucleotide_str.replace('\n', '')
-    gene_str = gene_str.replace('\n', '')
-
-    gene_str = gene_str.upper()
-    nucleotide_str = nucleotide_str.upper()
+    nucleotide_str = nucleotide_str.replace('\n', '').upper()
+    gene_str = gene_str.replace('\n', '').upper()
 
     codon_genes = codon_change(gene_str)
     codon_nucleotides = codon_change(nucleotide_str)
@@ -193,6 +197,8 @@ def codon_summary():
     print("Codons {} were mutated to {}".format(codon_mutant_gene, codon_mutant_nucleotides))
     print("Total Mutation in the Protein: ", len(codon_mutation_index))
     print()
+
+    mutation_gui()
 
 
 mutation_gui()
