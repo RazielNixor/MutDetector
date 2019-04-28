@@ -1,6 +1,6 @@
 import textwrap
 
-from helpers import clean_string, create_list_of_strings
+from helpers import clean_string, create_list_of_strings, read_file, read_file_upper
 from variables import CODONS
 
 
@@ -23,6 +23,20 @@ def mutation_gui():
             )
         )
         choice1 = int(input("Make your choice here: "))
+
+        # TODO:
+        '''
+        To handle incorrect input for numerics
+
+        while True:
+            try:
+                num = int(input('Enter a number: '))
+            except ValueError:
+                print('Input must be numeric')
+            else:
+                print(f'Your number is {num}')
+                break
+        '''
         if choice1 == 0:
             format_page()
         if choice1 == 1:
@@ -59,20 +73,26 @@ def sequence_gene_filter(list_from_file):
     return gene_acronym, just_gene_seq
 
 
-def format_page(file_input='GeneDatabase.txt'):
-    # file_input = input("Please enter a file path: ")
+# TODO: Look into doing something like this to run the program and isolate functionality
+# def run_program():
+#     genes = read_file(file_input)
+#     formatted_string = format_page(master_list=genes)
+#     save_file(data=formatted_string)
 
-    with open(file_input) as gene_ref:
-        master_list = [line for line in gene_ref]
-    output = open("FormattedDatabase.txt", "w")
+
+def format_page(master_list):
+    file_input = input("Please enter a file path: ")
+    master_list = read_file(file_input)
 
     gene_acronym, gene_sequence = sequence_gene_filter(master_list)
     gene_acronym = [line.replace('\n', '') for line in gene_acronym]
+
     real_list = []
     for x in gene_sequence:
         for z in x:
             real_list.append(z)
     another_list = [nucleotide for nucleotide in real_list if nucleotide.isalpha()]
+
     str_list = ''
     for x in another_list:
         str_list += x
@@ -81,16 +101,17 @@ def format_page(file_input='GeneDatabase.txt'):
     print()
     print(gene_acronym)
     print(str_list)
-    output.write(str(str_list))
-    output.close()
+
+    with open("FormattedDatabase.txt", "w") as output:
+        output.write(str(str_list))
+
     mutation_gui()
 
 
-def mutation_detector(file_input='GeneDatabase.txt'):
+def mutation_detector():
     try:
-        # file_input = input("Please enter a file path: ")
-        with open(file_input) as gene_ref:
-            master_list = [line.upper() for line in gene_ref]
+        file_input = input("Please enter a file path: ")
+        master_list = read_file_upper(file_input)
 
         gene_acronym, just_gene_seq = sequence_gene_filter(master_list)
 
@@ -183,4 +204,5 @@ def codon_summary():
     mutation_gui()
 
 
-mutation_gui()
+if __name__ == '__main__':
+    mutation_gui()
